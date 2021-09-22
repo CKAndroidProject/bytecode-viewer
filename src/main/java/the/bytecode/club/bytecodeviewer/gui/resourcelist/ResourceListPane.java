@@ -12,22 +12,28 @@ import java.awt.event.MouseEvent;
 import java.io.File;
 import java.util.Enumeration;
 import java.util.Map.Entry;
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
+import javax.swing.JTree;
+import javax.swing.tree.MutableTreeNode;
 import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
-
 import me.konloch.kontainer.io.DiskWriter;
 import org.apache.commons.io.FilenameUtils;
 import the.bytecode.club.bytecodeviewer.BytecodeViewer;
 import the.bytecode.club.bytecodeviewer.decompilers.Decompiler;
 import the.bytecode.club.bytecodeviewer.gui.contextmenu.ContextMenu;
+import the.bytecode.club.bytecodeviewer.resources.ResourceContainer;
 import the.bytecode.club.bytecodeviewer.resources.importing.Import;
-import the.bytecode.club.bytecodeviewer.translation.TranslatedStrings;
 import the.bytecode.club.bytecodeviewer.translation.TranslatedComponents;
+import the.bytecode.club.bytecodeviewer.translation.TranslatedStrings;
 import the.bytecode.club.bytecodeviewer.translation.components.TranslatedJCheckBox;
 import the.bytecode.club.bytecodeviewer.translation.components.TranslatedJTextField;
 import the.bytecode.club.bytecodeviewer.translation.components.TranslatedVisibleComponent;
-import the.bytecode.club.bytecodeviewer.resources.ResourceContainer;
 import the.bytecode.club.bytecodeviewer.util.FileDrop;
 import the.bytecode.club.bytecodeviewer.util.LazyNameUtil;
 import the.bytecode.club.bytecodeviewer.util.MiscUtils;
@@ -255,6 +261,36 @@ public class ResourceListPane extends TranslatedVisibleComponent implements File
         } else {
             tree.collapsePath(parent);
         }
+    }
+
+    @SuppressWarnings("rawtypes")
+    public void removeNode(final JTree tree, final TreePath nodePath) {
+        MutableTreeNode node = findNodeByPath(nodePath);
+        if (node == null)
+            return;
+        
+        node.removeFromParent();
+        tree.repaint();
+        tree.updateUI();
+    }
+    
+    @SuppressWarnings("rawtypes")
+    private MutableTreeNode findNodeByPath(TreePath path) {
+        MutableTreeNode node = treeRoot;
+        for (int pathStep = 1; pathStep < path.getPathCount(); pathStep++) {
+            TreeNode pathNode = (TreeNode) path.getPathComponent(pathStep);
+            int childIndex = node.getIndex(pathNode);
+            if (childIndex < 0) {
+                return null;
+            }
+            node = (MutableTreeNode) node.getChildAt(childIndex);
+            
+            if (node == null) {
+                return null;
+            }
+        }
+        
+        return node;
     }
     
     public void resetWorkspace()

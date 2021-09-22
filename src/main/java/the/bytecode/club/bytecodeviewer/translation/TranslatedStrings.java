@@ -1,9 +1,9 @@
 package the.bytecode.club.bytecodeviewer.translation;
 
-import the.bytecode.club.bytecodeviewer.api.BCV;
-
 import java.io.IOException;
 import java.util.HashSet;
+import java.util.Set;
+import the.bytecode.club.bytecodeviewer.api.BCV;
 
 /***************************************************************************
  * Bytecode Viewer (BCV) - Java & Android Reverse Engineering Suite        *
@@ -62,7 +62,7 @@ public enum TranslatedStrings
 	
 	OPEN_UNSTYLED,
 	QUICK_OPEN,
-	REMOVE,
+	DELETE,
 	NEW,
 	EXPAND,
 	COLLAPSE,
@@ -84,6 +84,7 @@ public enum TranslatedStrings
 	PLEASE_SEND_THIS_ERROR_LOG_TO,
 	PLEASE_SEND_RESOURCES,
 	ONE_PLUGIN_AT_A_TIME,
+	ILLEGAL_ACCESS_ERROR,
 	
 	
 	YES,
@@ -122,7 +123,7 @@ public enum TranslatedStrings
 	DRAG_CLASS_JAR,
 	;
 	
-	public static final HashSet<String> nameSet = new HashSet<>();
+	public static final Set<String> nameSet = new HashSet<>();
 	
 	static
 	{

@@ -1,18 +1,19 @@
 package the.bytecode.club.bytecodeviewer.gui.util;
 
 import java.awt.BorderLayout;
-import java.awt.Font;
-import java.awt.event.InputEvent;
 import java.util.Objects;
 import java.util.regex.Matcher;
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JPanel;
+import javax.swing.JViewport;
+import javax.swing.SwingUtilities;
 import javax.swing.event.CaretEvent;
 import javax.swing.event.CaretListener;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
-import org.fife.ui.rtextarea.RTextScrollPane;
 import org.objectweb.asm.ClassWriter;
 import the.bytecode.club.bytecodeviewer.BytecodeViewer;
 import the.bytecode.club.bytecodeviewer.Configuration;
@@ -20,7 +21,7 @@ import the.bytecode.club.bytecodeviewer.compilers.Compiler;
 import the.bytecode.club.bytecodeviewer.decompilers.Decompiler;
 import the.bytecode.club.bytecodeviewer.gui.components.MethodsRenderer;
 import the.bytecode.club.bytecodeviewer.gui.components.SearchableRSyntaxTextArea;
-import the.bytecode.club.bytecodeviewer.gui.hexviewer.JHexEditor;
+import the.bytecode.club.bytecodeviewer.gui.hexviewer.HexViewer;
 import the.bytecode.club.bytecodeviewer.gui.resourceviewer.BytecodeViewPanel;
 import the.bytecode.club.bytecodeviewer.gui.resourceviewer.viewer.ClassViewer;
 import the.bytecode.club.bytecodeviewer.util.MethodParser;
@@ -95,7 +96,7 @@ public class BytecodeViewPanelUpdater implements Runnable
                 
                     SwingUtilities.invokeLater(() ->
                     {
-                        final JHexEditor hex = new JHexEditor(cw.toByteArray());
+                        final HexViewer hex = new HexViewer(cw.toByteArray());
                         bytecodeViewPanel.add(hex);
                     });
                 }

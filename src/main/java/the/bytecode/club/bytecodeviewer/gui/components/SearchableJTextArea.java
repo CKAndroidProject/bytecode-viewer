@@ -1,19 +1,25 @@
 package the.bytecode.club.bytecodeviewer.gui.components;
 
-import the.bytecode.club.bytecodeviewer.BytecodeViewer;
-import the.bytecode.club.bytecodeviewer.GlobalHotKeys;
-import the.bytecode.club.bytecodeviewer.resources.IconResources;
-import the.bytecode.club.bytecodeviewer.gui.components.listeners.PressKeyListener;
-import the.bytecode.club.bytecodeviewer.gui.components.listeners.ReleaseKeyListener;
-import the.bytecode.club.bytecodeviewer.translation.TranslatedComponents;
-import the.bytecode.club.bytecodeviewer.translation.components.TranslatedJCheckBox;
-import the.bytecode.club.bytecodeviewer.util.JTextAreaUtils;
-
-import javax.swing.*;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Font;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseWheelListener;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
+import the.bytecode.club.bytecodeviewer.BytecodeViewer;
+import the.bytecode.club.bytecodeviewer.GlobalHotKeys;
+import the.bytecode.club.bytecodeviewer.gui.components.listeners.PressKeyListener;
+import the.bytecode.club.bytecodeviewer.gui.components.listeners.ReleaseKeyListener;
+import the.bytecode.club.bytecodeviewer.resources.IconResources;
+import the.bytecode.club.bytecodeviewer.translation.TranslatedComponents;
+import the.bytecode.club.bytecodeviewer.translation.components.TranslatedJCheckBox;
+import the.bytecode.club.bytecodeviewer.util.JTextAreaUtils;
 
 /***************************************************************************
  * Bytecode Viewer (BCV) - Java & Android Reverse Engineering Suite        *
@@ -76,7 +82,7 @@ public class SearchableJTextArea extends JTextArea
 		
 		addKeyListener(new PressKeyListener(keyEvent ->
 		{
-			if ((keyEvent.getKeyCode() == KeyEvent.VK_F) && ((keyEvent.getModifiers() & KeyEvent.CTRL_MASK) != 0))
+			if ((keyEvent.getKeyCode() == KeyEvent.VK_F) && ((keyEvent.getModifiersEx() & KeyEvent.CTRL_DOWN_MASK) != 0))
 				searchInput.requestFocus();
 			
 			GlobalHotKeys.keyPressed(keyEvent);
